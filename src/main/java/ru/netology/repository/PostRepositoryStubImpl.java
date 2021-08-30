@@ -3,10 +3,7 @@ package ru.netology.repository;
 import org.springframework.stereotype.Repository;
 import ru.netology.model.Post;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -16,11 +13,11 @@ public class PostRepositoryStubImpl implements PostRepository {
     private final Map<Long, Post> concurrentHashMap = new ConcurrentHashMap<>();
 
     public List<Post> all() {
-        return Collections.emptyList();
+        return new ArrayList<>(concurrentHashMap.values());
     }
 
     public Optional<Post> getById(long id) {
-        return Optional.empty();
+        return Optional.of(concurrentHashMap.get(id));
     }
 
     public synchronized Post save(Post post) {
